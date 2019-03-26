@@ -6,7 +6,7 @@
           <v-flex xs12 sm8 md4>
             <div class="gray elevation-2">
               <v-toolbar flat dense class="cyan" dark>
-                <v-toolbar-title>Register</v-toolbar-title>
+                <v-toolbar-title>Login</v-toolbar-title>
               </v-toolbar>
               <div class="pl-4 pr-4 pt-2 pb-2">
                 <v-text-field  
@@ -23,8 +23,8 @@
                 <br>
                 <v-btn
                   class="cyan"
-                  @click="register">
-                  Register
+                  @click="Login">
+                  Login
                 </v-btn>
               </div>
             </div>
@@ -46,9 +46,9 @@ export default {
     }
   },
   methods: {
-    async register () {
+    async login () {
       try {
-        const response = await AuthenticationService.register({
+        const response = await AuthenticationService.login({
           email: this.email,
           password: this.password
       })
