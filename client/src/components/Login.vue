@@ -9,21 +9,23 @@
                 <v-toolbar-title>Login</v-toolbar-title>
               </v-toolbar>
               <div class="pl-4 pr-4 pt-2 pb-2">
-                <v-text-field  
+                <v-text-field
                   label="Email"
-                  id="email"
-                  v-model="email"/>
-                <input 
-                <v-text-field  
+                  v-model="email"
+                ></v-text-field>
+                <br>
+                <v-text-field
                   label="Password"
-                  id="password"
-                  v-model="password"/>
+                  type="password"
+                  v-model="password"
+                ></v-text-field>
                 <br>
                 <div class="error" v-html="error" />
                 <br>
                 <v-btn
+                  dark
                   class="cyan"
-                  @click="Login">
+                  @click="login">
                   Login
                 </v-btn>
               </div>
@@ -39,7 +41,7 @@
 import AuthenticationService from '@/services/AuthenticationService'
 export default {
   data () {
-    return{
+    return {
       email: '',
       password: '',
       error: null
@@ -51,14 +53,15 @@ export default {
         const response = await AuthenticationService.login({
           email: this.email,
           password: this.password
-      })
+        })
+        this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.user)
       } catch (error) {
         this.error = error.response.data.error
       }
-      console.log(response.data)
     }
   }
-};
+}
 </script>
 
 <style scoped>
